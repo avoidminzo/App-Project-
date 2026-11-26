@@ -149,7 +149,7 @@ Provides verified, high-definition public domain and open-source cinema with liv
 
 | Category | Component / Library | Version | Purpose |
 |---|---|---|---|
-| **Language** | Kotlin | 1.9.23 | Modern, null-safe language |
+| **Language** | Kotlin | 1.9.23 | Modern, null-sae language |
 | **UI** | Jetpack Compose + Material 3 | BOM 2024.04.01 | Declarative reactive UI |
 | **Media Player** | AndroidX Media3 ExoPlayer | 1.3.1 | Core streaming engine (HLS/DASH/MP4/Subs) |
 | **Network** | Ktor Client | 2.3.10 | High-performance asynchronous HTTP client |
@@ -161,38 +161,3 @@ Provides verified, high-definition public domain and open-source cinema with liv
 | **Serialization**| Kotlinx Serialization | 1.6.3 | JSON manifest & provider schema parsing |
 | **Testing** | JUnit 4, MockK, Coroutines Test | 4.13.2 / 1.13.10 | Unit testing & repository validation |
 
----
-
-## 🔒 Security Architecture
-
-1. **Strict HTTPS Validation**:
-   - `SecurityValidator.validateHttpsUrl()` rejects plain HTTP, `file://`, `content://`, `javascript:`, or malformed URLs.
-   - `android:usesCleartextTraffic="false"` enforced in `AndroidManifest.xml`.
-2. **Bytecode Isolation & Sandbox**:
-   - Executable binary extensions (`.dex`, `.cs3`, `.apk`, `.so`) are detected and blocked from execution in the main application process.
-3. **Integrity Checksums**:
-   - Manifest parser supports SHA-256 integrity verification (`verifySha256`).
-4. **Credential & Token Protection**:
-   - Ktor network logger sanitizes authorization headers and access tokens before outputting to Android logs.
-   - CineFlow does not bypass DRM systems or private authentication endpoints.
-
----
-
-## 🚀 Building & Testing
-
-### Prerequisites
-- JDK 17 (e.g. Eclipse Temurin 17)
-- Android SDK Platform 34 & Build Tools 34.0.0
-
-### Command-Line Build
-```powershell
-# Set environment
-$env:JAVA_HOME = "C:\Program Files\Eclipse Adoptium\jdk-17.0.21.10002-hotspot"
-$env:ANDROID_HOME = "C:\Android\sdk"
-
-# Run all unit tests
-.\gradlew.bat test
-
-# Assemble Debug APK
-.\gradlew.bat assembleDebug
-```
